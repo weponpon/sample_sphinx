@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="ja" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>sample ドキュメント</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
+        <script src="_static/translations.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="索引" href="genindex.html" />
+    <link rel="search" title="検索" href="search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="#" class="icon icon-home"> sample
+          </a>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Intro:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="index.html#document-docs/intro">Intro</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="index.html#document-src/utils/modules">utils</a></li>
+<li class="toctree-l1"><a class="reference internal" href="index.html#document-src/data/modules">data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="index.html#document-src/preprocess/modules">preprocess</a></li>
+<li class="toctree-l1"><a class="reference internal" href="index.html#document-src/features/modules">features</a></li>
+<li class="toctree-l1"><a class="reference internal" href="index.html#document-src/models/modules">models</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">APPENDIX:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="index.html#document-docs/other_functions_that_were_helpful">参考になった関数や処理</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="#">sample</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="#" class="icon icon-home"></a></li>
+      <li class="breadcrumb-item active">sample  ドキュメント</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="id1">
+<h1>水位予測コンペ ソースコード整理<a class="headerlink" href="#id1" title="この見出しへのパーマリンク"></a></h1>
+<div class="toctree-wrapper compound">
+<span id="document-docs/intro"></span><section id="intro">
+<h2>Intro<a class="headerlink" href="#intro" title="この見出しへのパーマリンク"></a></h2>
+<p>水位予測コンペへ参加した。それを整理していく。</p>
+</section>
+</div>
+<section id="id2">
+<h2>作成したソースコード（抜粋）<a class="headerlink" href="#id2" title="この見出しへのパーマリンク"></a></h2>
+<p>コンペ中作成したコードの内いくつか抜粋して整理する。コンペで使用したデータ特有の処理は対象外とする。対象は他のコンペでも使用できそうなコード。</p>
+<div class="toctree-wrapper compound">
+<span id="document-src/utils/modules"></span><section id="utils">
+<h3>utils<a class="headerlink" href="#utils" title="この見出しへのパーマリンク"></a></h3>
+<div class="toctree-wrapper compound">
+<span id="document-src/utils/get_root_dir"></span><section id="module-get_root_dir">
+<span id="get-root-dir-module"></span><h4>get_root_dir module<a class="headerlink" href="#module-get_root_dir" title="この見出しへのパーマリンク"></a></h4>
+<dl class="py function">
+<dt class="sig sig-object py" id="get_root_dir.get_root_dir">
+<span class="sig-prename descclassname"><span class="pre">get_root_dir.</span></span><span class="sig-name descname"><span class="pre">get_root_dir</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#get_root_dir.get_root_dir" title="この定義へのパーマリンク"></a></dt>
+<dd><p>rootディレクトリの位置を絶対パスとして取得する.</p>
+<dl class="field-list simple">
+<dt class="field-odd">戻り値</dt>
+<dd class="field-odd"><p>root directory</p>
+</dd>
+<dt class="field-even">戻り値の型</dt>
+<dd class="field-even"><p>Path</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+</div>
+</section>
+<span id="document-src/data/modules"></span><section id="data">
+<h3>data<a class="headerlink" href="#data" title="この見出しへのパーマリンク"></a></h3>
+<div class="toctree-wrapper compound">
+<span id="document-src/data/agg"></span><section id="module-agg">
+<span id="agg-module"></span><h4>agg module<a class="headerlink" href="#module-agg" title="この見出しへのパーマリンク"></a></h4>
+<dl class="py function">
+<dt class="sig sig-object py" id="agg.extract_cols">
+<span class="sig-prename descclassname"><span class="pre">agg.</span></span><span class="sig-name descname"><span class="pre">extract_cols</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span><span class="p"><span class="pre">:</span></span><span class="w">  </span><span class="n"><span class="pre">DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">c</span></span><span class="p"><span class="pre">:</span></span><span class="w">  </span><span class="n"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w">  </span><span class="pre">list</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#agg.extract_cols" title="この定義へのパーマリンク"></a></dt>
+<dd><p>データからカラムを指定して取り出す関数.</p>
+<dl class="field-list simple">
+<dt class="field-odd">パラメータ</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>df</strong> (<em>pd.DataFrame</em>) -- 対象のデータ</p></li>
+<li><p><strong>c</strong> (<em>Union</em><em>[</em><em>str</em><em>, </em><em>list</em><em>]</em>) -- 抽出したいカラム</p></li>
+</ul>
+</dd>
+<dt class="field-even">戻り値</dt>
+<dd class="field-even"><p>対象のデータから指定したカラムで抽出したデータ</p>
+</dd>
+<dt class="field-odd">戻り値の型</dt>
+<dd class="field-odd"><p>pd.DataFrame</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+</div>
+</section>
+<span id="document-src/preprocess/modules"></span><section id="preprocess">
+<h3>preprocess<a class="headerlink" href="#preprocess" title="この見出しへのパーマリンク"></a></h3>
+<div class="toctree-wrapper compound">
+<span id="document-src/preprocess/data_preprocessing"></span><section id="module-data_preprocessing">
+<span id="data-preprocessing-module"></span><h4>data_preprocessing module<a class="headerlink" href="#module-data_preprocessing" title="この見出しへのパーマリンク"></a></h4>
+<dl class="py function">
+<dt class="sig sig-object py" id="data_preprocessing.missing_value_handling">
+<span class="sig-prename descclassname"><span class="pre">data_preprocessing.</span></span><span class="sig-name descname"><span class="pre">missing_value_handling</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span><span class="p"><span class="pre">:</span></span><span class="w">  </span><span class="n"><span class="pre">DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">expl_cols</span></span><span class="p"><span class="pre">:</span></span><span class="w">  </span><span class="n"><span class="pre">list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">obj_col</span></span><span class="p"><span class="pre">:</span></span><span class="w">  </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">contains_null_rate</span></span><span class="p"><span class="pre">:</span></span><span class="w">  </span><span class="n"><span class="pre">float</span></span><span class="w">  </span><span class="o"><span class="pre">=</span></span><span class="w">  </span><span class="default_value"><span class="pre">0.1</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#data_preprocessing.missing_value_handling" title="この定義へのパーマリンク"></a></dt>
+<dd><p>欠損値処理の関数.</p>
+<p>目的変数にある欠損を削除し、残ったデータについて欠損数を調べる。欠損数の割合が、(残った目的変数の長さ)×(contains_null_rate)以下のカラムのみ使用する。使用するカラムについて、列毎に平均値を計算し欠損補完を行う。</p>
+<dl class="field-list simple">
+<dt class="field-odd">パラメータ</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>df</strong> (<em>pd.DataFrame</em>) -- 対象のデータ</p></li>
+<li><p><strong>expl_cols</strong> (<em>list</em>) -- 説明変数リスト</p></li>
+<li><p><strong>obj_col</strong> (<em>str</em>) -- 目的変数</p></li>
+<li><p><strong>contains_null_rate</strong> (<em>float</em>) -- 目的変数に含まれる欠損数を許容する割合. Defaults to 0.1.</p></li>
+</ul>
+</dd>
+<dt class="field-even">戻り値</dt>
+<dd class="field-even"><p><p>欠損値処理結果の辞書</p>
+<ul class="simple">
+<li><p>processed_df: 処理済のデータ</p></li>
+<li><p>use_cols: 欠損補完を行った際に使用したカラム</p></li>
+</ul>
+</p>
+</dd>
+<dt class="field-odd">戻り値の型</dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="data_preprocessing.value_to_float">
+<span class="sig-prename descclassname"><span class="pre">data_preprocessing.</span></span><span class="sig-name descname"><span class="pre">value_to_float</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span><span class="p"><span class="pre">:</span></span><span class="w">  </span><span class="n"><span class="pre">DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">col</span></span><span class="p"><span class="pre">:</span></span><span class="w">  </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#data_preprocessing.value_to_float" title="この定義へのパーマリンク"></a></dt>
+<dd><p>データのcolについて数字でないものをnp.nanに置き換える関数.</p>
+<dl class="field-list simple">
+<dt class="field-odd">パラメータ</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>df</strong> (<em>pd.DataFrame</em>) -- 対象のデータ</p></li>
+<li><p><strong>col</strong> (<em>str</em>) -- 対象のカラム</p></li>
+</ul>
+</dd>
+<dt class="field-even">戻り値</dt>
+<dd class="field-even"><p>colについて数字のみに修正したデータ</p>
+</dd>
+<dt class="field-odd">戻り値の型</dt>
+<dd class="field-odd"><p>pd.DataFrame</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+</div>
+</section>
+<span id="document-src/features/modules"></span><section id="features">
+<h3>features<a class="headerlink" href="#features" title="この見出しへのパーマリンク"></a></h3>
+<div class="toctree-wrapper compound">
+<span id="document-src/features/make_learning_data"></span><section id="module-make_learning_data">
+<span id="make-learning-data-module"></span><h4>make_learning_data module<a class="headerlink" href="#module-make_learning_data" title="この見出しへのパーマリンク"></a></h4>
+<dl class="py function">
+<dt class="sig sig-object py" id="make_learning_data.make_date_hour">
+<span class="sig-prename descclassname"><span class="pre">make_learning_data.</span></span><span class="sig-name descname"><span class="pre">make_date_hour</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">date</span></span><span class="p"><span class="pre">:</span></span><span class="w">  </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#make_learning_data.make_date_hour" title="この定義へのパーマリンク"></a></dt>
+<dd><p>入力されたdateについて、24時間分のhour列を作成したデータを作成する.</p>
+<dl class="field-list simple">
+<dt class="field-odd">パラメータ</dt>
+<dd class="field-odd"><p><strong>date</strong> (<em>int</em>) -- 日付</p>
+</dd>
+<dt class="field-even">戻り値</dt>
+<dd class="field-even"><p>日付(date)と時間(hour)をカラムに持つデータ</p>
+</dd>
+<dt class="field-odd">戻り値の型</dt>
+<dd class="field-odd"><p>pd.DataFrame</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="make_learning_data.make_learning_data">
+<span class="sig-prename descclassname"><span class="pre">make_learning_data.</span></span><span class="sig-name descname"><span class="pre">make_learning_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span><span class="p"><span class="pre">:</span></span><span class="w">  </span><span class="n"><span class="pre">DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">expl_cols</span></span><span class="p"><span class="pre">:</span></span><span class="w">  </span><span class="n"><span class="pre">list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">obj_cols</span></span><span class="p"><span class="pre">:</span></span><span class="w">  </span><span class="n"><span class="pre">list</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#make_learning_data.make_learning_data" title="この定義へのパーマリンク"></a></dt>
+<dd><p>データを説明変数と目的変数に分割し、辞書型で返す関数.</p>
+<dl class="field-list simple">
+<dt class="field-odd">パラメータ</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>df</strong> (<em>pd.DataFrame</em>) -- 対象のデータ</p></li>
+<li><p><strong>expl_cols</strong> (<em>list</em>) -- 説明変数のリスト</p></li>
+<li><p><strong>obj_cols</strong> (<em>list</em>) -- 目的変数のリスト</p></li>
+</ul>
+</dd>
+<dt class="field-even">戻り値</dt>
+<dd class="field-even"><p>説明変数&quot;X&quot;と目的変数&quot;y&quot;とする辞書</p>
+</dd>
+<dt class="field-odd">戻り値の型</dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+</div>
+</section>
+<span id="document-src/models/modules"></span><section id="models">
+<h3>models<a class="headerlink" href="#models" title="この見出しへのパーマリンク"></a></h3>
+<div class="toctree-wrapper compound">
+<span id="document-src/models/modeling"></span><section id="module-modeling">
+<span id="modeling-module"></span><h4>modeling module<a class="headerlink" href="#module-modeling" title="この見出しへのパーマリンク"></a></h4>
+<dl class="py function">
+<dt class="sig sig-object py" id="modeling.make_params_list">
+<span class="sig-prename descclassname"><span class="pre">modeling.</span></span><span class="sig-name descname"><span class="pre">make_params_list</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#modeling.make_params_list" title="この定義へのパーマリンク"></a></dt>
+<dd><p>lightgbmで使用するパラメータの候補をリストで出力する関数.</p>
+<dl class="field-list simple">
+<dt class="field-odd">戻り値</dt>
+<dd class="field-odd"><p>lightgbmのパラメータの候補リスト</p>
+</dd>
+<dt class="field-even">戻り値の型</dt>
+<dd class="field-even"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="modeling.modeling_lightgbm">
+<span class="sig-prename descclassname"><span class="pre">modeling.</span></span><span class="sig-name descname"><span class="pre">modeling_lightgbm</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X_train</span></span><span class="p"><span class="pre">:</span></span><span class="w">  </span><span class="n"><span class="pre">DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_train</span></span><span class="p"><span class="pre">:</span></span><span class="w">  </span><span class="n"><span class="pre">DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">params</span></span><span class="p"><span class="pre">:</span></span><span class="w">  </span><span class="n"><span class="pre">dict</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#modeling.modeling_lightgbm" title="この定義へのパーマリンク"></a></dt>
+<dd><p>lightgbmモデルを使用して予測モデルを作成する関数.</p>
+<p>評価指標は二乗平均兵香港誤差(RMSE)を使用している</p>
+<dl class="field-list simple">
+<dt class="field-odd">パラメータ</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>X_train</strong> (<em>pd.DataFrame</em>) -- 説明変数データ</p></li>
+<li><p><strong>y_train</strong> (<em>pd.DataFrame</em>) -- 目的変数データ</p></li>
+<li><p><strong>params</strong> (<em>dict</em>) -- 学習に使用するパラメータ</p></li>
+</ul>
+</dd>
+<dt class="field-even">戻り値</dt>
+<dd class="field-even"><p><p>学習の結果</p>
+<ul class="simple">
+<li><p>X_train: 説明変数データ</p></li>
+<li><p>y_train: 目的変数データ</p></li>
+<li><p>model: 説明変数データ</p></li>
+<li><p>lgb_results: 学習ログ</p></li>
+<li><p>loss_train: 学習ロス</p></li>
+</ul>
+</p>
+</dd>
+<dt class="field-odd">戻り値の型</dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="modeling.modeling_lightgbm_with_cv">
+<span class="sig-prename descclassname"><span class="pre">modeling.</span></span><span class="sig-name descname"><span class="pre">modeling_lightgbm_with_cv</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span><span class="p"><span class="pre">:</span></span><span class="w">  </span><span class="n"><span class="pre">DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span><span class="p"><span class="pre">:</span></span><span class="w">  </span><span class="n"><span class="pre">DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">params</span></span><span class="p"><span class="pre">:</span></span><span class="w">  </span><span class="n"><span class="pre">dict</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#modeling.modeling_lightgbm_with_cv" title="この定義へのパーマリンク"></a></dt>
+<dd><p>クロスバリデーションを使用したlightgbmでの学習を行う.</p>
+<dl class="field-list simple">
+<dt class="field-odd">パラメータ</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>X</strong> (<em>pd.DataFrame</em>) -- 説明変数データ</p></li>
+<li><p><strong>y</strong> (<em>pd.DataFrame</em>) -- 目的変数データ</p></li>
+<li><p><strong>params</strong> (<em>dict</em>) -- 学習パラメータ</p></li>
+</ul>
+</dd>
+<dt class="field-even">戻り値</dt>
+<dd class="field-even"><p><p>_description_</p>
+<ul class="simple">
+<li><p>params: 学習に使用したパラメータ</p></li>
+<li><p>cv_score: cvスコア。各学習で算出したスコアの平均値</p></li>
+<li><p>models: 各学習で作成したモデルのリスト</p></li>
+</ul>
+</p>
+</dd>
+<dt class="field-odd">戻り値の型</dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="modeling.save_model">
+<span class="sig-prename descclassname"><span class="pre">modeling.</span></span><span class="sig-name descname"><span class="pre">save_model</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model</span></span><span class="p"><span class="pre">:</span></span><span class="w">  </span><span class="n"><span class="pre">Booster</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">save_file_name</span></span><span class="p"><span class="pre">:</span></span><span class="w">  </span><span class="n"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w">  </span><span class="pre">PathLike</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#modeling.save_model" title="この定義へのパーマリンク"></a></dt>
+<dd><p>学習済モデルをpickleで保存する関数.</p>
+<dl class="field-list simple">
+<dt class="field-odd">パラメータ</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>model</strong> (<em>lgb.basic.Booster</em>) -- 学習済モデル</p></li>
+<li><p><strong>save_file_name</strong> (<em>Union</em><em>[</em><em>str</em><em>, </em><em>os.pathlike</em><em>]</em>) -- 保存するファイルpath</p></li>
+</ul>
+</dd>
+<dt class="field-even">戻り値</dt>
+<dd class="field-even"><p>&quot;model saved&quot;</p>
+</dd>
+<dt class="field-odd">戻り値の型</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+</div>
+</section>
+</div>
+<p>上から、</p>
+<ul class="simple">
+<li><p>一般的なコード</p></li>
+<li><p>データ処理に関するコード</p></li>
+<li><p>データの前処理に関するコード</p></li>
+<li><p>特徴量作成に関するコード</p></li>
+<li><p>モデル作成に関するコード</p></li>
+</ul>
+<p>を意味している</p>
+<div class="toctree-wrapper compound">
+<span id="document-docs/other_functions_that_were_helpful"></span><section id="id1">
+<h3>参考になった関数や処理<a class="headerlink" href="#id1" title="この見出しへのパーマリンク"></a></h3>
+<p>学習を進める中で参考になった関数や処理についてまとめていく。</p>
+<section id="groupby">
+<h4>groupby<a class="headerlink" href="#groupby" title="この見出しへのパーマリンク"></a></h4>
+<p><code class="docutils literal notranslate"><span class="pre">pandas.DataFrame</span></code>を使用する際に、<code class="docutils literal notranslate"><span class="pre">groupby</span></code>で集計することがある。例えば、以下のような処理で<code class="docutils literal notranslate"><span class="pre">print</span></code>すると次のような出力となる。<code class="docutils literal notranslate"><span class="pre">sum</span></code>以外にも<code class="docutils literal notranslate"><span class="pre">min</span></code>や<code class="docutils literal notranslate"><span class="pre">max</span></code>、<code class="docutils literal notranslate"><span class="pre">mean</span></code>などで集計もできる。これ以外にも<code class="docutils literal notranslate"><span class="pre">apply</span></code>も使用できる。</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">random</span>
+<span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">3407</span><span class="p">)</span>
+
+<span class="n">n</span> <span class="o">=</span> <span class="mi">50</span>
+
+<span class="n">fruit</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">choices</span><span class="p">([</span><span class="s2">&quot;apple&quot;</span><span class="p">,</span> <span class="s2">&quot;orange&quot;</span><span class="p">,</span> <span class="s2">&quot;banana&quot;</span><span class="p">],</span> <span class="n">k</span><span class="o">=</span><span class="n">n</span><span class="p">)</span>
+<span class="n">like</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">choices</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">],</span> <span class="n">k</span><span class="o">=</span><span class="n">n</span><span class="p">)</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s2">&quot;fruit&quot;</span><span class="p">:</span><span class="n">fruit</span><span class="p">,</span> <span class="s2">&quot;like&quot;</span><span class="p">:</span> <span class="n">like</span><span class="p">})</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="s2">&quot;fruit&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span>
+
+<span class="c1">#         like</span>
+<span class="c1"># fruit      </span>
+<span class="c1"># apple     67</span>
+<span class="c1"># banana    42</span>
+<span class="c1"># orange    30</span>
+</pre></div>
+</div>
+<p>また、特定の<code class="docutils literal notranslate"><span class="pre">fruit</span></code>毎に別の集計したい場合は以下のように<code class="docutils literal notranslate"><span class="pre">if</span></code>で分岐を作って処理できる。</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">f</span><span class="p">,</span> <span class="n">df_</span> <span class="ow">in</span> <span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="s2">&quot;fruit&quot;</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">f</span><span class="o">==</span><span class="s2">&quot;apple&quot;</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">df_</span><span class="p">[</span><span class="s2">&quot;like&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">df_</span><span class="p">[</span><span class="s2">&quot;like&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span>
+
+<span class="c1"># apple 67</span>
+<span class="c1"># banana 2.625</span>
+<span class="c1"># orange 2.5</span>
+</pre></div>
+</div>
+</section>
+<section id="locals">
+<h4>locals<a class="headerlink" href="#locals" title="この見出しへのパーマリンク"></a></h4>
+<p>ローカル変数を取得する関数。以下を実行すればよく、返り値はkeyがローカル変数名、valueがkeyのローカル変数名に対応する値の辞書。</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">locals</span><span class="p">()</span>
+</pre></div>
+</div>
+</section>
+</section>
+</div>
+</section>
+<section id="indices-and-tables">
+<h2>Indices and tables<a class="headerlink" href="#indices-and-tables" title="この見出しへのパーマリンク"></a></h2>
+<ul class="simple">
+<li><p><a class="reference internal" href="genindex.html"><span class="std std-ref">索引</span></a></p></li>
+<li><p><a class="reference internal" href="py-modindex.html"><span class="std std-ref">モジュール索引</span></a></p></li>
+<li><p><a class="reference internal" href="search.html"><span class="std std-ref">検索ページ</span></a></p></li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, umitak.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
