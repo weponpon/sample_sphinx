@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="ja" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>modeling &mdash; sample  ドキュメント</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
+        <script src="../_static/translations.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="索引" href="../genindex.html" />
+    <link rel="search" title="検索" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> sample
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Intro:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../docs/intro.html">Intro</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../src/utils/modules.html">utils</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../src/data/modules.html">data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../src/preprocess/modules.html">preprocess</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../src/features/modules.html">features</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../src/models/modules.html">models</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">APPENDIX:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../docs/other_functions_that_were_helpful.html">参考になった関数や処理</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">sample</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">モジュールコード</a></li>
+      <li class="breadcrumb-item active">modeling</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>modeling のソースコード</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Union</span>
+<span class="kn">import</span> <span class="nn">pickle</span>
+
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="kn">import</span> <span class="nn">lightgbm</span> <span class="k">as</span> <span class="nn">lgb</span>
+<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">KFold</span>
+<span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">mean_squared_error</span>
+
+
+<div class="viewcode-block" id="modeling_lightgbm"><a class="viewcode-back" href="../src/models/modeling.html#modeling.modeling_lightgbm">[ドキュメント]</a><span class="k">def</span> <span class="nf">modeling_lightgbm</span><span class="p">(</span><span class="n">X_train</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="n">y_train</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="n">params</span><span class="p">:</span> <span class="nb">dict</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;lightgbmモデルを使用して予測モデルを作成する関数.</span>
+
+<span class="sd">    評価指標は二乗平均兵香港誤差(RMSE)を使用している</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        X_train (pd.DataFrame): 説明変数データ</span>
+<span class="sd">        y_train (pd.DataFrame): 目的変数データ</span>
+<span class="sd">        params (dict): 学習に使用するパラメータ</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        dict: 学習の結果</span>
+
+<span class="sd">        - X_train: 説明変数データ</span>
+<span class="sd">        - y_train: 目的変数データ</span>
+<span class="sd">        - model: 説明変数データ</span>
+<span class="sd">        - lgb_results: 学習ログ</span>
+<span class="sd">        - loss_train: 学習ロス</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">X_train</span> <span class="o">=</span> <span class="n">X_train</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+    <span class="n">y_train</span> <span class="o">=</span> <span class="n">y_train</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+    <span class="c1"># データセットを登録</span>
+    <span class="n">lgb_train</span> <span class="o">=</span> <span class="n">lgb</span><span class="o">.</span><span class="n">Dataset</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">free_raw_data</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="n">lgb_results</span> <span class="o">=</span> <span class="p">{}</span>                                    <span class="c1"># 学習の履歴を入れる入物</span>
+    <span class="n">model</span> <span class="o">=</span> <span class="n">lgb</span><span class="o">.</span><span class="n">train</span><span class="p">(</span>
+            <span class="n">params</span><span class="o">=</span><span class="n">params</span><span class="p">,</span>
+            <span class="n">train_set</span><span class="o">=</span><span class="n">lgb_train</span><span class="p">,</span>
+            <span class="n">valid_sets</span><span class="o">=</span><span class="p">[</span><span class="n">lgb_train</span><span class="p">],</span>
+            <span class="n">valid_names</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Train&#39;</span><span class="p">],</span>
+            <span class="n">verbose_eval</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span>
+            <span class="n">evals_result</span><span class="o">=</span><span class="n">lgb_results</span><span class="p">,</span>
+            <span class="n">callbacks</span><span class="o">=</span><span class="p">[</span>
+                <span class="n">lgb</span><span class="o">.</span><span class="n">early_stopping</span><span class="p">(</span><span class="n">stopping_rounds</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">),</span> 
+                <span class="n">lgb</span><span class="o">.</span><span class="n">log_evaluation</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+                <span class="p">]</span>
+        <span class="p">)</span>
+    <span class="n">loss_train</span> <span class="o">=</span> <span class="n">lgb_results</span><span class="p">[</span><span class="s1">&#39;Train&#39;</span><span class="p">][</span><span class="s1">&#39;rmse&#39;</span><span class="p">]</span>
+    <span class="k">return</span> <span class="p">{</span>
+        <span class="s2">&quot;X_train&quot;</span><span class="p">:</span> <span class="n">X_train</span><span class="p">,</span>
+        <span class="s2">&quot;y_train&quot;</span><span class="p">:</span> <span class="n">y_train</span><span class="p">,</span>
+        <span class="s2">&quot;model&quot;</span><span class="p">:</span> <span class="n">model</span><span class="p">,</span>
+        <span class="s2">&quot;lgb_results&quot;</span><span class="p">:</span> <span class="n">lgb_results</span><span class="p">,</span>
+        <span class="s2">&quot;loss_train&quot;</span><span class="p">:</span> <span class="n">loss_train</span>
+    <span class="p">}</span></div>
+
+
+<div class="viewcode-block" id="save_model"><a class="viewcode-back" href="../src/models/modeling.html#modeling.save_model">[ドキュメント]</a><span class="k">def</span> <span class="nf">save_model</span><span class="p">(</span><span class="n">model</span><span class="p">:</span> <span class="n">lgb</span><span class="o">.</span><span class="n">basic</span><span class="o">.</span><span class="n">Booster</span><span class="p">,</span> <span class="n">save_file_name</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">PathLike</span><span class="p">]):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;学習済モデルをpickleで保存する関数.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        model (lgb.basic.Booster): 学習済モデル</span>
+<span class="sd">        save_file_name (Union[str, os.pathlike]): 保存するファイルpath</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        str: &quot;model saved&quot;</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;SAVE_MODEL: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">save_file_name</span><span class="p">))</span>
+    <span class="n">pickle</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="nb">open</span><span class="p">(</span><span class="n">save_file_name</span><span class="p">,</span> <span class="s1">&#39;wb&#39;</span><span class="p">))</span>
+    <span class="k">return</span> <span class="s2">&quot;model saved&quot;</span></div>
+
+
+<div class="viewcode-block" id="modeling_lightgbm_with_cv"><a class="viewcode-back" href="../src/models/modeling.html#modeling.modeling_lightgbm_with_cv">[ドキュメント]</a><span class="k">def</span> <span class="nf">modeling_lightgbm_with_cv</span><span class="p">(</span><span class="n">X</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="n">params</span><span class="p">:</span> <span class="nb">dict</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;クロスバリデーションを使用したlightgbmでの学習を行う.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        X (pd.DataFrame): 説明変数データ</span>
+<span class="sd">        y (pd.DataFrame): 目的変数データ</span>
+<span class="sd">        params (dict): 学習パラメータ</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        dict: _description_</span>
+
+<span class="sd">        - params: 学習に使用したパラメータ</span>
+<span class="sd">        - cv_score: cvスコア。各学習で算出したスコアの平均値</span>
+<span class="sd">        - models: 各学習で作成したモデルのリスト</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">FOLD</span> <span class="o">=</span> <span class="mi">3</span>
+    <span class="n">VERBOSE_EVAL</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+
+    <span class="n">valid_scores</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">models</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="n">kf</span> <span class="o">=</span> <span class="n">KFold</span><span class="p">(</span><span class="n">n_splits</span><span class="o">=</span><span class="n">FOLD</span><span class="p">,</span> <span class="n">shuffle</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+    <span class="n">X</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">y</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span>
+
+    <span class="k">for</span> <span class="n">_</span><span class="p">,</span> <span class="p">(</span><span class="n">train_indices</span><span class="p">,</span> <span class="n">valid_indices</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">kf</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">X</span><span class="p">)):</span>
+        <span class="n">X_train</span><span class="p">,</span> <span class="n">X_valid</span> <span class="o">=</span> <span class="n">X</span><span class="p">[</span><span class="n">train_indices</span><span class="p">],</span> <span class="n">X</span><span class="p">[</span><span class="n">valid_indices</span><span class="p">]</span>
+        <span class="n">y_train</span><span class="p">,</span> <span class="n">y_valid</span> <span class="o">=</span> <span class="n">y</span><span class="p">[</span><span class="n">train_indices</span><span class="p">],</span> <span class="n">y</span><span class="p">[</span><span class="n">valid_indices</span><span class="p">]</span>
+        <span class="n">lgb_train</span> <span class="o">=</span> <span class="n">lgb</span><span class="o">.</span><span class="n">Dataset</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+        <span class="n">lgb_eval</span> <span class="o">=</span> <span class="n">lgb</span><span class="o">.</span><span class="n">Dataset</span><span class="p">(</span><span class="n">X_valid</span><span class="p">,</span> <span class="n">y_valid</span><span class="p">)</span>
+
+        <span class="n">model</span> <span class="o">=</span> <span class="n">lgb</span><span class="o">.</span><span class="n">train</span><span class="p">(</span>
+            <span class="n">params</span><span class="p">,</span>
+            <span class="n">lgb_train</span><span class="p">,</span>
+            <span class="n">valid_sets</span><span class="o">=</span><span class="p">[</span><span class="n">lgb_train</span><span class="p">,</span> <span class="n">lgb_eval</span><span class="p">],</span>
+            <span class="n">verbose_eval</span><span class="o">=</span><span class="n">VERBOSE_EVAL</span><span class="p">,</span>
+            <span class="n">callbacks</span><span class="o">=</span><span class="p">[</span>
+                <span class="n">lgb</span><span class="o">.</span><span class="n">early_stopping</span><span class="p">(</span><span class="n">stopping_rounds</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">),</span> 
+                <span class="n">lgb</span><span class="o">.</span><span class="n">log_evaluation</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+                <span class="p">]</span>
+        <span class="p">)</span>
+
+        <span class="n">y_valid_pred</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_valid</span><span class="p">)</span>
+        <span class="n">score</span> <span class="o">=</span> <span class="n">mean_squared_error</span><span class="p">(</span><span class="n">y_valid</span><span class="p">,</span> <span class="n">y_valid_pred</span><span class="p">)</span>
+        <span class="n">valid_scores</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">score</span><span class="p">)</span>
+
+        <span class="n">models</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">model</span><span class="p">)</span>
+
+    <span class="n">cv_score</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">valid_scores</span><span class="p">)</span>
+    <span class="k">return</span> <span class="p">{</span>
+        <span class="s2">&quot;params&quot;</span><span class="p">:</span> <span class="n">params</span><span class="p">,</span>
+        <span class="s2">&quot;cv_score&quot;</span><span class="p">:</span> <span class="n">cv_score</span><span class="p">,</span>
+        <span class="s2">&quot;models&quot;</span><span class="p">:</span> <span class="n">models</span>
+    <span class="p">}</span></div>
+
+
+<div class="viewcode-block" id="make_params_list"><a class="viewcode-back" href="../src/models/modeling.html#modeling.make_params_list">[ドキュメント]</a><span class="k">def</span> <span class="nf">make_params_list</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;lightgbmで使用するパラメータの候補をリストで出力する関数.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        list: lightgbmのパラメータの候補リスト</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">learning_rate_list</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="o">*</span> <span class="mf">0.01</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">10</span><span class="p">]]</span>
+    <span class="n">num_iteration_list</span> <span class="o">=</span> <span class="p">[</span><span class="mi">3000</span><span class="p">]</span>
+    <span class="n">max_depth_list</span> <span class="o">=</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">7</span><span class="p">]</span>
+    
+    <span class="n">params_list</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">lr</span> <span class="ow">in</span> <span class="n">learning_rate_list</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">ni</span> <span class="ow">in</span> <span class="n">num_iteration_list</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">ml</span> <span class="ow">in</span> <span class="n">max_depth_list</span><span class="p">:</span>
+                <span class="n">params</span> <span class="o">=</span> <span class="p">{</span>
+                    <span class="s1">&#39;verbose&#39;</span><span class="p">:</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span>
+                    <span class="s1">&#39;task&#39;</span><span class="p">:</span> <span class="s1">&#39;train&#39;</span><span class="p">,</span>              
+                    <span class="s1">&#39;boosting_type&#39;</span><span class="p">:</span> <span class="s1">&#39;gbdt&#39;</span><span class="p">,</span>      
+                    <span class="s1">&#39;objective&#39;</span><span class="p">:</span> <span class="s1">&#39;regression&#39;</span><span class="p">,</span>    
+                    <span class="s1">&#39;metric&#39;</span><span class="p">:</span> <span class="s1">&#39;rmse&#39;</span><span class="p">,</span>             
+                    <span class="s1">&#39;learning_rate&#39;</span><span class="p">:</span> <span class="n">lr</span><span class="p">,</span>
+                    <span class="s1">&#39;num_iteration&#39;</span><span class="p">:</span> <span class="n">ni</span><span class="p">,</span>
+                    <span class="s2">&quot;max_depth&quot;</span><span class="p">:</span> <span class="n">ml</span><span class="p">,</span>
+                <span class="p">}</span>
+                <span class="n">params_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">params</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">params_list</span></div>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, umitak.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
