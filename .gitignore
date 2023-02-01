@@ -1,0 +1,9 @@
+# 仮想環境
+.venv
+
+# 特定のファイル
+*.pyc
+.DS_Store
+
+# ディレクトリ
+build/doctrees/*
