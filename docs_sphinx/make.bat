@@ -25,11 +25,11 @@ if errorlevel 9009 (
 
 if "%1" == "" goto help
 
-:html
-%SPHINXBUILD% -b html %SOURCEDIR% ../"docs" %SPHINXOPTS% %O%
+if "%1" == "singlehtml" %SPHINXBUILD% -M %1 %SOURCEDIR% %BUILDDIR% %SPHINXOPTS% %O%
 goto end
 
-%SPHINXBUILD% -M %1 %SOURCEDIR% %BUILDDIR% %SPHINXOPTS% %O%
+:html
+%SPHINXBUILD% -b html %SOURCEDIR% ../"docs" %SPHINXOPTS% %O%
 goto end
 
 :help

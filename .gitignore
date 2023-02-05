@@ -9,3 +9,5 @@
 */_build/doctrees/*
 */_static/*
 */_templates/*
+*/notebooks/*
+*/src/dev/*
